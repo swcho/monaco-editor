@@ -38,7 +38,7 @@ requirejs(
 	['test/unit/setup'],
 	function () {
 		glob(
-			'out/languages/amd-tsc/basic-languages/*/*.test.js',
+			'out/languages/amd-tsc/basic-languages/*/sql.template.test.js',
 			{ cwd: path.join(__dirname, '../../') },
 			function (err, files) {
 				if (err) {

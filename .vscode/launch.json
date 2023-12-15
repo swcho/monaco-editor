@@ -41,7 +41,7 @@
 			"name": "Monaco Languages Unit Tests",
 			"skipFiles": ["<node_internals>/**"],
 			"program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-			"args": ["-r", "test/unit/all.js"],
+			"args": ["test/unit/all.js"],
 			"outFiles": ["${workspaceFolder}/**/*.js"]
 		},
 		{

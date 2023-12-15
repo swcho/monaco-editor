@@ -770,6 +770,7 @@ export const language = <languages.IMonarchLanguage>{
 	pseudoColumns: ['$ACTION', '$IDENTITY', '$ROWGUID', '$PARTITION'],
 	tokenizer: {
 		root: [
+			[/\${/, { token: '@rematch', switchTo: '@templateInSimpleState.root' }],
 			{ include: '@comments' },
 			{ include: '@whitespace' },
 			{ include: '@pseudoColumns' },
@@ -827,6 +828,7 @@ export const language = <languages.IMonarchLanguage>{
 			[/'/, { token: 'string', next: '@string' }]
 		],
 		string: [
+			[/\${/, { token: '@rematch', switchTo: '@templateInSimpleState.string' }],
 			[/[^']+/, 'string'],
 			[/''/, 'string'],
 			[/'/, { token: 'string', next: '@pop' }]
@@ -855,6 +857,12 @@ export const language = <languages.IMonarchLanguage>{
 			[/END\b/i, { token: 'keyword.block' }],
 			[/WHEN\b/i, { token: 'keyword.choice' }],
 			[/THEN\b/i, { token: 'keyword.choice' }]
-		]
+		],
+		templateInSimpleState: [
+			[/\${/, 'delimiter.template'],
+			['}', { token: 'delimiter.template', switchTo: '@$S2.$S3' }],
+			{ include: 'templateRoot' }
+		],
+		templateRoot: [[/[^:]/, 'variable.template']]
 	}
 };
